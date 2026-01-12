@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vue: Datos de Persona</title>
+  <!-- Cargamos Vue 3 desde CDN: no usamos compilación ni SFC -->
+  <script src="https://unpkg.com/vue@3"></script>
+  <!-- Reutilizamos el diseño del ejercicio React -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Contenedor raíz donde se monta la app Vue -->
+  <div id="app" class="container">
+    <h1>Datos de Persona</h1>
+
+    <!-- Sección superior: información actual (no editable) -->
+    <section class="datos-persona">
+      <h2>Información Actual</h2>
+      <div class="persona-card">
+        <!-- Foto actual: atributo src enlazado a la URL de la foto -->
+        <img class="foto-persona" :src="persona.foto" alt="Foto de la persona">
+        <div class="info">
+          <!-- Interpolación de variables para mostrar datos -->
+          <p><strong>Nombre:</strong> {{ persona.nombre }}</p>
+          <p><strong>Apellidos:</strong> {{ persona.apellidos }}</p>
+          <p><strong>Edad:</strong> {{ persona.edad }} años</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección inferior: formulario de edición -->
+    <!-- Usamos @submit.prevent para evitar el envío convencional del formulario -->
+    <section class="formulario-edicion">
+      <h2>Editar Datos</h2>
+      <form @submit.prevent="actualizarDatos($event)">
+        <!-- v-model crea un doble enlace entre los campos y 'formPersona' -->
+        <div class="form-group">
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" v-model="formPersona.nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="apellidos">Apellidos:</label>
+          <input id="apellidos" v-model="formPersona.apellidos" />
+        </div>
+
+        <div class="form-group">
+          <label for="foto">URL de la Fotografía:</label>
+          <input id="foto" v-model="formPersona.foto" />
+        </div>
+
+        <div class="form-group">
+          <label for="edad">Edad:</label>
+          <input id="edad" v-model.number="formPersona.edad" />
+        </div>
+
+        <button class="btn-actualizar" type="submit">Actualizar Datos</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Obtenemos 'createApp' del objeto global 'Vue'
+    const { createApp } = Vue;
+
+    // Creamos la aplicación con Options API (data + methods)
+    const app = createApp({
+      // 'data' devuelve el estado inicial de la aplicación
+      data() {
+        return {
+          // Objeto principal con los datos que se muestran arriba
+          persona: {
+            nombre: 'Mario',
+            apellidos: 'Bros',
+            foto: 'https://i.pinimg.com/564x/3f/81/ad/3f81d3ac439bb5c568332204994738d.jpg',
+            edad: 39
+          },
+          // Objeto del formulario: editable por el usuario
+          // Se inicializa con los mismos valores que 'persona'
+          formPersona: {
+            nombre: 'Mario',
+            apellidos: 'Bros',
+            foto: 'https://i.pinimg.com/564x/3f/81/ad/3f81d3ac439bb5c568332204994738d.jpg',
+            edad: 39
+          }
+        };
+      },
+      methods: {
+        // Copia los valores del formulario a 'persona'
+        actualizarDatos(evento) {
+          // No sería necesario si usamos .prevent, pero mantenemos el ejemplo del apunte
+          // evento.preventDefault();
+          this.persona.nombre = this.formPersona.nombre;
+          this.persona.apellidos = this.formPersona.apellidos;
+          this.persona.foto = this.formPersona.foto;
+          this.persona.edad = this.formPersona.edad;
+        }
+      }
+    });
+
+    // Montamos la app sobre el contenedor '#app'
+    app.mount('#app');
+  </script>
+</body>
+</html>
