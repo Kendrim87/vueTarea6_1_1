@@ -1,16 +1,15 @@
-# Vue Tarea 6.1.1
+# Tarea 6.1.1: Creación de una aplicación sencilla con Vue
 
-Aplicación Vue (sin componentes de un solo archivo) que muestra y permite editar los datos de una persona.
+## Enunciado
 
-## Estructura
-- `index.html`: App Vue cargada por CDN, plantilla y lógica (Options API: `data`, `methods`).
-- `styles.css`: Estilos tomados del ejercicio React para reproducir el diseño.
+Crea una aplicación Vue (sin utilizar componentes de un solo archivo) que muestre los datos de una persona. Dichos datos estarán almacenados en un objeto con las siguientes propiedades:
 
-## Cómo ejecutar
-1. Servidor HTTP (ya disponible en tu entorno bajo `localhost`).
-2. Abre en el navegador:
-   - `http://localhost/DWEC/UT06/Tarea6_1_1/Vue/`
+- Nombre
+- Apellidos
+- Fotografía (cargada de Internet a través de una URL)
+- Edad
 
-## Notas
-- Sin SFC: no hay `.vue` ni tooling (Vite/Webpack). Solo HTML+CSS+JS y Vue CDN.
-- Formulario con `v-model` y envío con `@submit.prevent` para copiar `formPersona` a `persona`.
+La aplicación tendrá dos secciones:
+
+- En la parte superior de la página, una sección no editable que mostrará los datos de la persona.
+- En la parte inferior, un formulario para poder modificar los datos de la persona.
